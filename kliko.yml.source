@@ -1,0 +1,112 @@
+ms, string,
+    Name of input MeasurementSet
+image, string,
+    Name of output image file (default is <msname-stokes-mode-nchan>.img)
+fits, string, (no)
+    Name of output image fits file ('no' means no fits file) empty is <imagename>.fits
+hdf5, string, (no)
+    Name of output image HDF5 file ('no' means no HDF5 file) empty is <imagename>.hdf5
+prior, string,
+    Name of prior image file (default is <imagename>.prior)
+model, string,
+    Name of model image file (default is <imagename>.model)
+restored, string,
+    Name of restored image file (default is <imagename>.restored)
+residual, string,
+    Name of residual image file (default is <imagename>.residual)
+data, string, (DATA)
+    Name of DATA column to use
+mode, string, (mfs)
+    Imaging mode (mfs, channel, or velocity)
+filter, string,
+    Apply gaussian tapering filter; specify as major,minor,pa
+clean_beam, string,
+    Specify clean restoring beam; specify as major axis,minor axis,position angle with units
+weight, string, (briggs)
+    Weighting scheme (uniform, superuniform, natural, briggs (robust), briggsabs, or radial)
+weight_fov, quantity string,
+    Field of view size for uniform/briggs weighting, if different from image size
+noise, , (1.0)
+    Noise (in Jy) for briggsabs weightingfloat
+robust, float, (0.0)
+    Robust parameter
+wprojplanes, int, (0)
+    if >0 specifies nr of convolution functions to use in W-projection
+padding, float, (1.0)
+    padding factor in image plane (>=1.0)
+cachesize, int, (512)
+    maximum size of gridding cache (in MBytes)
+stokes, string, (I)
+    Stokes parameters to image (e.g. IQUV)
+nfacets, int, (1)
+    number of facets in x or y
+npix, int, (256)
+    number of image pixels in x and y direction
+cellsize, quantity string, (1arcsec)
+    pixel width in x and y direction
+phasecenter, direction string,
+    phase center to be used (e.g. 'j2000, 05h30m, -30.2deg')
+field, int, (0)
+    field id to be used
+spwid, int vector, (0)
+    spectral window id(s) to be used
+chanmode, string, (channel)
+    frequency channel mode
+nchan, int vector, (1)
+    number of frequency channels to select from each spectral window (one number per spw)
+chanstart, int vector, (0)
+    first frequency channel per each spw (0-relative)
+chanstep, int vector, (1)
+    frequency channel step per each spw
+img_nchan, int, (1)
+    number of frequency channels in image
+img_chanstart, int, (0)
+    first frequency channel in image (0-relative)
+img_chanstep, int, (1)
+    frequency channel step in image
+uvrange, string,
+    UV range filter for input
+select, string,
+    TaQL selection string for MS
+operation, string, (image)
+    Operation (empty,image,psf,clark,hogbom,csclean,multiscale,entropy)
+niter, int, (1000)
+    Number of clean iterations
+gain, float, (0.1)
+    Loop gain for cleaning
+threshold, quantity string, (0Jy)
+    Flux level at which to stop cleaning
+targetflux, quantity string, (1.0Jy)
+    Target flux for maximum entropy
+sigma, quantity string, (0.001Jy)
+    deviation for maximum entropy
+fixed, bool, (False)
+    Keep clean model fixed
+fillmodel, bool, (False)
+    fill MODEL_DATA column with clean model visibilities, else keeps model in memory
+constrainflux, bool, (False)
+    Constrain image to match target flux? For max entropy
+prefervelocity, bool, (True)
+    Should FITS image spectral axis be velocity or frequency
+mask, string,
+    Name of the mask to use in cleaning
+maskblc, int vector, (0,0)
+    bottom-left corner of mask region
+masktrc, int vector, (image shape)
+    top-right corner of mask region
+nscales, int, (5)
+    Scales for MultiScale Clean
+uservector, float vector, (0)
+    user-defined scales for MultiScale clean
+maskvalue, float, (-1.0)
+    Value to store in mask region; if given, mask is created; if mask not exists, defaults to 1.0
+cyclefactor, float, (1.5)
+    multi-field deconvolution parameter; see casapy's imager.setmfcontrol
+cyclespeedup, float, (-1)
+    multi-field deconvolution parameter; see casapy's imager.setmfcontrol
+cyclemaxpsffraction, float, (0.8)
+    multi-field deconvolution parameter; see casapy's imager.setmfcontrol
+stoplargenegatives, int, (2)
+    multi-field deconvolution parameter; see casapy's imager.setmfcontrol
+stoppointmode, setmfcontrol parameter; see casapy, (-1)
+    multi-field deconvolution parameter; see casapy's imager.setmfcontrol
