@@ -1,0 +1,279 @@
+schema_version: 3
+name: lwimager
+description: standalone radio interferometric imager derived from CASA
+url: https://github.com/kernsuite-docker/lwimager
+io: join
+
+sections:
+  -
+    name: parameters
+    description: LWimager options
+    fields:
+    -
+      name: ms
+      help_text: Name of input MeasurementSet
+      type: str
+      required: True
+    -
+      name: image
+      help_text: Name of output image file (default is <msname-stokes-mode-nchan>.img)
+      type: str
+    -
+      name: fits
+      help_text: Name of output image fits file ('no' means no fits file) empty is <imagename>.fits
+      type: str
+      initial: no
+    -
+      name: hdf5
+      help_text: Name of output image HDF5 file ('no' means no HDF5 file) empty is <imagename>.hdf5
+      type: str
+      initial: no
+    -
+      name: prior
+      help_text: Name of prior image file (default is <imagename>.prior)
+      type: str
+          -
+      name: model
+      help_text: Name of model image file (default is <imagename>.model)
+      type: str
+          -
+      name: restored
+      help_text: Name of restored image file (default is <imagename>.restored)
+      type: str
+          -
+      name: residual
+      help_text: Name of residual image file (default is <imagename>.residual)
+      type: str
+          -
+      name: data
+      help_text: Name of DATA column to use
+      type: str
+      initial: DATA
+    -
+      name: mode
+      help_text: Imaging mode (mfs, channel, or velocity)
+      type: str
+      initial: mfs
+    -
+      name: filter
+      help_text: Apply gaussian tapering filter; specify as major,minor,pa
+      type: str
+          -
+      name: clean_beam
+      help_text: Specify clean restoring beam; specify as major axis,minor axis,position angle with units
+      type: str
+          -
+      name: weight
+      help_text: Weighting scheme (uniform, superuniform, natural, briggs (robust), briggsabs, or radial)
+      type: str
+      initial: briggs
+    -
+      name: weight_fov
+      help_text: Field of view size for uniform/briggs weighting, if different from image size
+      type: str
+          -
+      name: noise
+      help_text: Noise (in Jy) for briggsabs weightingfloat
+      type: float
+      initial: 1.0
+    -
+      name: robust
+      help_text: Robust parameter
+      type: float
+      initial: 0.0
+    -
+      name: wprojplanes
+      help_text: if >0 specifies nr of convolution functions to use in W-projection
+      type: int
+      initial: 0
+    -
+      name: padding
+      help_text: padding factor in image plane (>=1.0)
+      type: float
+      initial: 1.0
+    -
+      name: cachesize
+      help_text: maximum size of gridding cache (in MBytes)
+      type: int
+      initial: 512
+    -
+      name: stokes
+      help_text: Stokes parameters to image (e.g. IQUV)
+      type: str
+      initial: I
+    -
+      name: nfacets
+      help_text: number of facets in x or y
+      type: int
+      initial: 1
+    -
+      name: npix
+      help_text: number of image pixels in x and y direction
+      type: int
+      initial: 256
+    -
+      name: cellsize
+      help_text: pixel width in x and y direction
+      type: str
+      initial: 1arcsec
+    -
+      name: phasecenter
+      help_text: phase center to be used (e.g. 'j2000, 05h30m, -30.2deg')
+      type: str
+          -
+      name: field
+      help_text: field id to be used
+      type: int
+      initial: 0
+    -
+      name: spwid
+      help_text: spectral window id(s) to be used
+      type: int
+      initial: 0
+    -
+      name: chanmode
+      help_text: frequency channel mode
+      type: str
+      initial: channel
+    -
+      name: nchan
+      help_text: number of frequency channels to select from each spectral window (one number per spw)
+      type: int
+      initial: 1
+    -
+      name: chanstart
+      help_text: first frequency channel per each spw (0-relative)
+      type: int
+      initial: 0
+    -
+      name: chanstep
+      help_text: frequency channel step per each spw
+      type: int
+      initial: 1
+    -
+      name: img_nchan
+      help_text: number of frequency channels in image
+      type: int
+      initial: 1
+    -
+      name: img_chanstart
+      help_text: first frequency channel in image (0-relative)
+      type: int
+      initial: 0
+    -
+      name: img_chanstep
+      help_text: frequency channel step in image
+      type: int
+      initial: 1
+    -
+      name: uvrange
+      help_text: UV range filter for input
+      type: str
+          -
+      name: select
+      help_text: TaQL selection string for MS
+      type: str
+          -
+      name: operation
+      help_text: Operation (empty,image,psf,clark,hogbom,csclean,multiscale,entropy)
+      type: str
+      initial: image
+    -
+      name: niter
+      help_text: Number of clean iterations
+      type: int
+      initial: 1000
+    -
+      name: gain
+      help_text: Loop gain for cleaning
+      type: float
+      initial: 0.1
+    -
+      name: threshold
+      help_text: Flux level at which to stop cleaning
+      type: str
+      initial: 0Jy
+    -
+      name: targetflux
+      help_text: Target flux for maximum entropy
+      type: str
+      initial: 1.0Jy
+    -
+      name: sigma
+      help_text: deviation for maximum entropy
+      type: str
+      initial: 0.001Jy
+    -
+      name: fixed
+      help_text: Keep clean model fixed
+      type: bool
+      initial: False
+    -
+      name: fillmodel
+      help_text: fill MODEL_DATA column with clean model visibilities, else keeps model in memory
+      type: bool
+      initial: False
+    -
+      name: constrainflux
+      help_text: Constrain image to match target flux? For max entropy
+      type: bool
+      initial: False
+    -
+      name: prefervelocity
+      help_text: Should FITS image spectral axis be velocity or frequency
+      type: bool
+      initial: True
+    -
+      name: mask
+      help_text: Name of the mask to use in cleaning
+      type: str
+          -
+      name: maskblc
+      help_text: bottom-left corner of mask region
+      type: int
+      initial: 0.0
+    -
+      name: masktrc
+      help_text: top-right corner of mask region
+      type: int
+      initial: 0
+    -
+      name: nscales
+      help_text: Scales for MultiScale Clean
+      type: int
+      initial: 5
+    -
+      name: uservector
+      help_text: user-defined scales for MultiScale clean
+      type: float
+      initial: 0
+    -
+      name: maskvalue
+      help_text: Value to store in mask region; if given, mask is created; if mask not exists, defaults to 1.0
+      type: float
+      initial: -1.0
+    -
+      name: cyclefactor
+      help_text: multi-field deconvolution parameter; see casapy's imager.setmfcontrol
+      type: float
+      initial: 1.5
+    -
+      name: cyclespeedup
+      help_text: multi-field deconvolution parameter; see casapy's imager.setmfcontrol
+      type: float
+      initial: -1
+    -
+      name: cyclemaxpsffraction
+      help_text: multi-field deconvolution parameter; see casapy's imager.setmfcontrol
+      type: float
+      initial: 0.8
+    -
+      name: stoplargenegatives
+      help_text: multi-field deconvolution parameter; see casapy's imager.setmfcontrol
+      type: int
+      initial: 2
+    -
+      name: stoppointmode
+      help_text: multi-field deconvolution parameter; see casapy's imager.setmfcontrol
+      type: float
+      initial: -1

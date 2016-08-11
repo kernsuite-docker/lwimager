@@ -1,0 +1,11 @@
+#!/usr/bin/env python
+import os
+from kliko.validate import validate
+from kliko import input_path
+
+parameters = validate()
+print(parameters)
+args = " ".join([k + "=" + str(v) for k, v in parameters.items()])
+cmd = '/usr/bin/lwimager ' + args
+print("starting: " + cmd)
+os.system(cmd)

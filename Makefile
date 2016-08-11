@@ -14,4 +14,5 @@ upload: build
 	docker push ${DOCKER_REPO}
 
 run: build
-	docker run -ti ${DOCKER_REPO}
+	#docker run -ti ${DOCKER_REPO}
+	kliko-run ${DOCKER_REPO} --ms /input/wsrt.ms
